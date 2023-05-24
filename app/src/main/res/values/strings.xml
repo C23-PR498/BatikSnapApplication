@@ -15,4 +15,8 @@
     <string name="switch_camera">Switch Camera</string>
     <string name="prev_img">Preview Image Description</string>
     <string name="scn_img">Second Image Description</string>
+    <string name="storyImage">Deskripsi untuk gambar cerita</string>
+    <string name="storyName">Nama Cerita</string>
+    <string name="storyDescription">Deskripsi Cerita</string>
+    <string name="splash_image_description">Splash image</string>
 </resources>

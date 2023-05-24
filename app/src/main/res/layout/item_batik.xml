@@ -28,8 +28,6 @@
                     android:layout_height="200dp"
                     android:contentDescription="@string/image_item"
                     android:scaleType="centerCrop"
-                    android:transitionName="@{@string/storyImage(String.valueOf(story.id))}"
-                    app:loadImage="@{story.photoUrl}"
                     app:srcCompat="@drawable/ic_launcher_background" />
 
                 <TextView
@@ -43,12 +41,10 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:text="@{story.name}"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-medium"
-                    android:transitionName="@{@string/storyName(String.valueOf(story.id))}"
                     tools:text="Name" />
             </FrameLayout>
 
@@ -61,10 +57,8 @@
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:padding="10dp"
-                android:text="@{story.description}"
                 android:textColor="#566892"
                 android:textSize="20sp"
-                android:transitionName="@{@string/storyDescription(String.valueOf(story.id))}"
                 tools:text="Description" />
 
         </LinearLayout>
