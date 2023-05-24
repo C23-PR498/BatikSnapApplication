@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">BatikSnapApplication</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Galeri</string>
+    <string name="message">Insert Your Batik Photo</string>
+    <string name="desc_gambar">deskripsi gambar</string>
+    <string name="upload">Upload</string>
+    <string name="message2">Upload Your Image</string>
+    <string name="image_item">Image Item Batik</string>
+    <string name="image_detail">Detail Image</string>
+    <string name="description">Deskripsi :</string>
+    <string name="from">Asal :</string>
+    <string name="history">Sejarah :</string>
+    <string name="captureImage">Capture Image</string>
+    <string name="switch_camera">Switch Camera</string>
+    <string name="prev_img">Preview Image Description</string>
+    <string name="scn_img">Second Image Description</string>
+</resources>
