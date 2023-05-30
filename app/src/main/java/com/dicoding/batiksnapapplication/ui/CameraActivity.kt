@@ -81,18 +81,16 @@ class CameraActivity : AppCompatActivity() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
-                    val bundle = Bundle()
-                    bundle.putBoolean("isBackCamera", cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
-                    bundle.putParcelable("selected_image", savedUri)
                     val uploadStoryIntent = Intent(this@CameraActivity, UploadActivity::class.java).apply {
-                        putExtras(bundle)
+                        putExtra("selectedImageUri", savedUri.toString())
                     }
-                    startActivityForResult(uploadStoryIntent, REQUEST_UPLOAD_STORY)
+                    startActivity(uploadStoryIntent)
                     finish()
                 }
             }
         )
     }
+
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
