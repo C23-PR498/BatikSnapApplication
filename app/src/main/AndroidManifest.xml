@@ -2,6 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dicoding.batiksnapapplication">
 
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -24,6 +30,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.CameraActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".ui.UploadActivity"
+            android:exported="false">
         </activity>
     </application>
 

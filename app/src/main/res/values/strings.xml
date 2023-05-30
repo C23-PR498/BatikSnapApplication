@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BatikSnapApplication</string>
+    <string name="app_name">Batik Snap</string>
     <string name="camera">Camera</string>
     <string name="gallery">Galeri</string>
     <string name="message">Insert Your Batik Photo</string>
@@ -19,4 +19,5 @@
     <string name="storyName">Nama Cerita</string>
     <string name="storyDescription">Deskripsi Cerita</string>
     <string name="splash_image_description">Splash image</string>
+    <string name="back">back\n</string>
 </resources>
