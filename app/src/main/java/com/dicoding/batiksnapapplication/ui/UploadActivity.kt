@@ -7,17 +7,15 @@ import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toFile
 import androidx.core.view.isInvisible
-import androidx.lifecycle.ViewModelProvider
-import com.dicoding.batiksnapapplication.MainActivity
 import com.dicoding.batiksnapapplication.databinding.ActivityUploadBinding
 import com.dicoding.batiksnapapplication.ui.utils.rotateBitmap
 import com.dicoding.batiksnapapplication.ui.utils.uriToFile
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -32,6 +30,7 @@ class UploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // get the URI from intent
         val selectedImageUriString = intent.getStringExtra("selectedImageUri")
         val selectedImageUri = Uri.parse(selectedImageUriString)
@@ -40,9 +39,6 @@ class UploadActivity : AppCompatActivity() {
 
         binding.uploadButton.setOnClickListener {
             uploadImage()
-        }
-        binding.backButton.setOnClickListener {
-            backList()
         }
 
         val fileUri = intent.getParcelableExtra<Uri>("selected_image")
@@ -126,7 +122,6 @@ class UploadActivity : AppCompatActivity() {
         binding.previewImageView.isInvisible = state
         binding.secondImageView.isInvisible = state
         binding.uploadButton.isInvisible = state
-        binding.backButton.isInvisible = state
 
     }
 
@@ -160,8 +155,14 @@ class UploadActivity : AppCompatActivity() {
         return file
     }
 
-    private fun backList () {
-        startActivity(Intent(this, MainActivity::class.java))
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                startActivity(Intent(this, HomeActivity::class.java))
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 

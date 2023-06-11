@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -15,6 +16,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.dicoding.batiksnapapplication.MainActivity
 import com.dicoding.batiksnapapplication.databinding.ActivityCameraBinding
 import com.dicoding.batiksnapapplication.ui.utils.createFile
 
@@ -33,7 +35,7 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle("Story Apps Course")
+        supportActionBar?.setTitle("Batik Snap")
 
         requestCameraPermission()
 
@@ -129,5 +131,15 @@ class CameraActivity : AppCompatActivity() {
         if (requestCode == REQUEST_UPLOAD_STORY && resultCode == Activity.RESULT_OK) {
 
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
