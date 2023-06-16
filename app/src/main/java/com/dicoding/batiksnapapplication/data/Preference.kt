@@ -19,6 +19,7 @@ object Preference {
         editor.apply()
     }
 
+
     fun logOut(context: Context) {
         val editor = editorPreference(context, "onSignIn")
         editor.remove("token")

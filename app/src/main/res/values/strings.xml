@@ -33,4 +33,7 @@
     <string name="name_hint">Enter your name</string>
     <string name="password_hint">Enter your password</string>
     <string name="logout">Log Out</string>
+    <string name="batikImage">photoUrl %s</string>
+    <string name="batikDeskripsi">description %s</string>
+    <string name="batikName">name %s</string>
 </resources>

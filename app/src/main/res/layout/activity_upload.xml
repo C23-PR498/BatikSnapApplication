@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.UploadActivity">
+    tools:context=".ui.upload.UploadActivity">
 
     <ImageView
         android:id="@+id/previewImageView"
@@ -34,6 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
 
+
     <ImageView
         android:id="@+id/secondImageView"
         android:layout_width="300dp"
@@ -50,9 +51,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/secondImageView">
-
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="170dp"
+            android:visibility="invisible"
+            android:id="@+id/pbCreateStory"/>
         <Button
-            android:id="@+id/uploadButton"
+            android:id="@+id/uploadImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"

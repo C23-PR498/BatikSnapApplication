@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
@@ -16,9 +18,11 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.dicoding.batiksnapapplication.MainActivity
 import com.dicoding.batiksnapapplication.databinding.ActivityCameraBinding
 import com.dicoding.batiksnapapplication.ui.utils.createFile
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 
 class CameraActivity : AppCompatActivity() {
     companion object {
@@ -35,11 +39,11 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle("Batik Snap")
+        supportActionBar?.title = "Story Apps Course"
 
         requestCameraPermission()
 
-        binding!!.captureImage.setOnClickListener { takePhoto() }
+        binding?.captureImage?.setOnClickListener { takePhoto() }
 
         binding!!.switchCamera.setOnClickListener {
             cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
@@ -83,16 +87,19 @@ class CameraActivity : AppCompatActivity() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
-                    val uploadStoryIntent = Intent(this@CameraActivity, UploadActivity::class.java).apply {
-                        putExtra("selectedImageUri", savedUri.toString())
+                    val reducedFile = reduceFileImage(File(savedUri.path))
+                    val bundle = Bundle()
+                    bundle.putBoolean("isBackCamera", cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
+                    bundle.putParcelable("selected_image", savedUri)
+                    val uploadStoryIntent = Intent(this@CameraActivity, HomeActivity::class.java).apply {
+                        putExtras(bundle)
                     }
-                    startActivity(uploadStoryIntent)
+                    startActivityForResult(uploadStoryIntent, REQUEST_UPLOAD_STORY)
                     finish()
                 }
             }
         )
     }
-
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -118,28 +125,42 @@ class CameraActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
+    fun reduceFileImage(file: File): File {
+        val bitmap = BitmapFactory.decodeFile(file.path)
+        var compressQuality = 100
+        var streamLength: Int
+
+        do {
+            val bmpStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+            val bmpPicByteArray = bmpStream.toByteArray()
+            streamLength = bmpPicByteArray.size
+            compressQuality -= 5
+        } while (streamLength > 1000000)
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+        return file
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_UPLOAD_STORY && resultCode == Activity.RESULT_OK) {
 
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                startActivity(Intent(this, MainActivity::class.java))
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

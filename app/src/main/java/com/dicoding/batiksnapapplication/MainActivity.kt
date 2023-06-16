@@ -13,10 +13,11 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.dicoding.batiksnapapplication.data.repositor.Result
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.batiksnapapplication.data.LoginResponse
+import com.dicoding.batiksnapapplication.data.response.LoginResponse
 import com.dicoding.batiksnapapplication.data.Preference
 import com.dicoding.batiksnapapplication.databinding.ActivityMainBinding
 import com.dicoding.batiksnapapplication.ui.HomeActivity
+import com.dicoding.batiksnapapplication.ui.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel
@@ -104,6 +105,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, data.message, Toast.LENGTH_LONG).show()
         } else {
             Preference.saveToken(data.access_token, this)
+//            Toast.makeText(this, "Token saved: ${data.access_token}", Toast.LENGTH_LONG).show()
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()

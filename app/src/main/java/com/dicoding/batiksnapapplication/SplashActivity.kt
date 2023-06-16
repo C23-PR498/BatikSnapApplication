@@ -16,16 +16,17 @@ import javax.xml.datatype.DatatypeConstants.DURATION
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
+
     companion object {
         private const val DURATION: Long = 1500
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         saveData()
-
 
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -37,6 +38,13 @@ class SplashActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+
+        var intent = Intent(this, MainActivity::class.java)
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                startActivity(intent)
+                finish()
+            }, DURATION)
 
     }
 

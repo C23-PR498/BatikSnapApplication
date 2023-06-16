@@ -14,12 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.batiksnapapplication.data.RegisterResponse
+import com.dicoding.batiksnapapplication.data.response.RegisterResponse
 import com.dicoding.batiksnapapplication.data.network.ApiConfig
 import com.dicoding.batiksnapapplication.data.repositor.AuthRepositor
 import com.dicoding.batiksnapapplication.databinding.ActivityRegisterBinding
 import com.dicoding.batiksnapapplication.data.repositor.Result
-import com.dicoding.batiksnapapplication.ui.HomeActivity
+import com.dicoding.batiksnapapplication.ui.ViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding

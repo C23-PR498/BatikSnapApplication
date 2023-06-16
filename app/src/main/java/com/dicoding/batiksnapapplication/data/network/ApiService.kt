@@ -1,16 +1,15 @@
 package com.dicoding.batiksnapapplication.data.network
 
-import com.dicoding.batiksnapapplication.data.LoginResponse
-import com.dicoding.batiksnapapplication.data.RegisterResponse
+import com.dicoding.batiksnapapplication.data.*
+import com.dicoding.batiksnapapplication.data.response.*
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
     @POST("login")
-    fun login(
+     fun login(
         @Field("email") email: String,
         @Field("password") password: String
     ): Call<LoginResponse>
@@ -22,22 +21,35 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): Call<RegisterResponse>
-//
-//    @GET("stories")
-//    suspend fun getStories(
-//        @Query("page") page: Int,
-//        @Query("size") size: Int,
-//    ) : StoriesResponse
-//
-//    @GET("stories")
-//    suspend fun getStoriesWithLocation(
-//        @Query("location") location: Int,
-//    ) : StoriesResponse
-//
-//    @Multipart
-//    @POST("stories")
-//    suspend fun postStory(
-//        @Part file: MultipartBody.Part,
-//        @Part("description") description: RequestBody,
-//    ): PostStoryResponse
+
+    @FormUrlEncoded
+    @GET("batik")
+    fun batik(
+        @Field("id") id: Int,
+        @Field("nama") nama: String,
+        @Field("deskripsi") deskripsi: String,
+        @Field("asal") asal: String,
+        @Field("sejarah") sejarah: String,
+        @Field("image") image: String
+    ): Call<BatikResponse>
+
+    @Multipart
+    @POST("upload")
+    suspend fun postImage(
+        @Part file: MultipartBody.Part
+    ): UploadResponse
+
+
+    @GET("list/{result_predict}")
+    suspend fun getBatik(
+        @Path("result_predict") resultPredict: String
+    ) : ListResponse
+
+
+    @GET("list/{result_predict}/{id}")
+    fun detail(
+        @Path("result_predict") resultPredict: String,
+        @Path("id") id: Int,
+    ) : Call<List<Batik>>
+
 }

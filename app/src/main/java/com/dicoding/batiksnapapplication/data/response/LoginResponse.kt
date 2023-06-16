@@ -1,8 +1,13 @@
-package com.dicoding.batiksnapapplication.data
+package com.dicoding.batiksnapapplication.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterResponse(
+data class LoginResponse(
+
+
+    @field:SerializedName("access_token")
+    val access_token: String,
+
 
     @field:SerializedName("error")
     val error: Boolean,
@@ -10,3 +15,4 @@ data class RegisterResponse(
     @field:SerializedName("message")
     val message: String
 )
+
